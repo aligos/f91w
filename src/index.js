@@ -1,48 +1,41 @@
 /* @flow */
 import React from 'react';
-import { View } from 'react-native';
+import { Font } from 'expo';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import { List, ListItem } from 'react-native-elements';
-import Instagram from './screens/Instagram';
-
-import type { NavigationProps } from 'react-navigation/src/TypeDefinition';
-
-const list = [
-  {
-    name: 'Instagram Example',
-    route: 'instagram',
-  },
-];
-
-class HomeScreen extends React.Component<NavigationProps> {
-  render() {
-    const { navigation } = this.props;
-    return (
-      <View style={{ flex: 1, justifyContent: 'center' }}>
-        <List containerStyle={{ marginBottom: 20 }}>
-          {list.map(l => (
-            <ListItem
-              key={l.name}
-              title={l.name}
-              onPress={() => navigation.navigate('Instagram')}
-            />
-          ))}
-        </List>
-      </View>
-    );
-  }
-}
+import { Icons } from '@screens';
 
 const AppNavigator = createStackNavigator({
   Home: {
-    screen: HomeScreen,
+    screen: Icons,
     navigationOptions: () => ({
       header: null,
     }),
   },
-  Instagram: {
-    screen: Instagram,
-  },
 });
 
-export default createAppContainer(AppNavigator);
+const Routes = createAppContainer(AppNavigator);
+
+export default class App extends React.Component {
+  state = {
+    fontLoaded: false,
+  };
+  async componentDidMount() {
+    await Font.loadAsync({
+      Fuel: require('../assets/fonts/fuel.ttf'),
+      Shades: require('../assets/fonts/shades.ttf'),
+      Vicon: require('../assets/fonts/vicon.ttf'),
+      Geometria: require('../assets/fonts/Geometria.ttf'),
+      GeometriaBold: require('../assets/fonts/Geometria-Bold.ttf'),
+      GeometriaMedium: require('../assets/fonts/Geometria-Medium.ttf'),
+    });
+
+    this.setState({ fontLoaded: true });
+  }
+  render() {
+    if (!this.state.fontLoaded) {
+      return null;
+    }
+
+    return <Routes />;
+  }
+}
