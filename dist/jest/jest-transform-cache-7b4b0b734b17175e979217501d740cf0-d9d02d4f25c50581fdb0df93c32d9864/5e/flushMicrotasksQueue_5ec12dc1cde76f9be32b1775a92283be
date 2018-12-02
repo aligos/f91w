@@ -1,8 +1,0 @@
-90765e2138a0d3829310cba69bd64f02
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = flushMicrotasksQueue;
-
-
-
-function flushMicrotasksQueue() {
-  return new Promise(function (resolve) {return setImmediate(resolve);});
-}
