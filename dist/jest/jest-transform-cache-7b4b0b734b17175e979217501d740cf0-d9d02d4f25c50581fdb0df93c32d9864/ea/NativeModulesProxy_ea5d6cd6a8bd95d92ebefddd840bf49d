@@ -1,0 +1,39 @@
+2b5d7bddde2b4906fac33d66bc38e12a
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));var _reactNative = require("react-native");
+
+var NativeProxy = _reactNative.NativeModules.ExpoNativeModuleProxy;
+var modulesConstantsKey = "modulesConstants";
+var exportedMethodsKey = "exportedMethods";
+
+var NativeModulesProxy = {};
+
+if (NativeProxy) {
+  Object.keys(NativeProxy[exportedMethodsKey]).forEach(function (moduleName) {
+    NativeModulesProxy[moduleName] = NativeProxy[modulesConstantsKey][moduleName] || {};
+    NativeProxy[exportedMethodsKey][moduleName].forEach(function (methodInfo) {
+      NativeModulesProxy[moduleName][methodInfo.name] = function _callee() {var key,argumentsCount,_len,args,_key,_args = arguments;return _regenerator.default.async(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                key = methodInfo.key, argumentsCount = methodInfo.argumentsCount;for (_len = _args.length, args = new Array(_len), _key = 0; _key < _len; _key++) {args[_key] = _args[_key];}if (!(
+                argumentsCount !== args.length)) {_context.next = 4;break;}throw (
+                  new Error("Arguments count mismatch, " + args.length + " provided, " + argumentsCount + " have been expected."));case 4:_context.next = 6;return _regenerator.default.awrap(
+
+                NativeProxy.callMethod(moduleName, key, args));case 6:return _context.abrupt("return", _context.sent);case 7:case "end":return _context.stop();}}}, null, this);};
+
+    });
+
+
+
+
+
+
+    NativeModulesProxy[moduleName].addListener = function () {var _NativeModules$EXReac;for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {args[_key2] = arguments[_key2];}return (
+        (_NativeModules$EXReac = _reactNative.NativeModules.EXReactNativeEventEmitter).addProxiedListener.apply(_NativeModules$EXReac, [moduleName].concat(args)));};
+    NativeModulesProxy[moduleName].removeListeners = function () {var _NativeModules$EXReac2;for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {args[_key3] = arguments[_key3];}return (
+        (_NativeModules$EXReac2 = _reactNative.NativeModules.EXReactNativeEventEmitter).removeProxiedListeners.apply(_NativeModules$EXReac2, [moduleName].concat(args)));};
+  });
+} else {
+  console.warn(
+  "No native NativeModulesProxy found among NativeModules, are you sure the expo-react-native-adapter's modules are linked properly?");
+
+}
+
+module.exports = NativeModulesProxy;

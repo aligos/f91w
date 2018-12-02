@@ -1,10 +1,11 @@
 /* @flow */
 import React, { Component } from 'react';
-import { SafeAreaView, View, Text, ScrollView } from 'react-native';
+import { SafeAreaView, View, Text } from 'react-native';
 import { Header } from 'react-native-elements';
 import colors from '@constants/colors';
 import Fuel from '@icons/Fuel';
 import Vicon from '@icons/Vicon';
+import StickyScroll from '@components/StickyScroll';
 
 const vicons = [
   'box',
@@ -73,24 +74,41 @@ export default class HeaderScreen extends Component {
   render() {
     return (
       <SafeAreaView>
-        <Header
-          leftComponent={<Fuel name="back" size={18} color={colors.black} />}
-          centerComponent={
-            <Text
+        <StickyScroll
+          makeScrollable
+          renderStickyHeader={() => (
+            <Header
+              leftComponent={<Fuel name="back" size={18} color={colors.black} />}
+              centerComponent={
+                <Text
+                  style={{
+                    fontFamily: 'GeometriaBold',
+                    fontSize: 20,
+                    height: 20,
+                    lineHeight: 23,
+                    color: colors.black,
+                  }}>
+                  Icons
+                </Text>
+              }
+              rightComponent={<Vicon name="bell" size={20} color={colors.black} />}
+              outerContainerStyles={{ backgroundColor: '#FFFFFF' }}
+            />
+          )}
+          renderStickyFooter={() => (
+            <View
               style={{
-                fontFamily: 'GeometriaBold',
-                fontSize: 20,
-                height: 20,
-                lineHeight: 23,
-                color: colors.black,
+                height: 114,
+                paddingBottom: 34,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: colors.black,
+                borderTopWidth: 1,
+                borderTopColor: colors.black,
               }}>
-              Icons
-            </Text>
-          }
-          rightComponent={<Vicon name="bell" size={20} color={colors.black} />}
-          outerContainerStyles={{ backgroundColor: '#FFFFFF' }}
-        />
-        <ScrollView>
+              <Text style={{ color: 'white', fontSize: 18 }}>{`Sticky footer`}</Text>
+            </View>
+          )}>
           <Text style={{ fontSize: 20, fontFamily: 'GeometriaBold', lineHeight: 20, padding: 10 }}>
             Fuel
           </Text>
@@ -155,7 +173,7 @@ export default class HeaderScreen extends Component {
               <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>{v}</Text>
             </View>
           ))}
-        </ScrollView>
+        </StickyScroll>
       </SafeAreaView>
     );
   }

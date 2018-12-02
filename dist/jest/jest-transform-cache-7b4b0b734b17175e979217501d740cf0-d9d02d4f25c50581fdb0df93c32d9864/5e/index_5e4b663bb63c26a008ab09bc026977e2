@@ -1,0 +1,13 @@
+01c384603663d1fd8d46ff3be5d8975a
+
+
+
+
+
+module.exports = {
+  Platform: {
+    OS: require('react-native').Platform.OS },
+
+  NativeModulesProxy: require("./src/NativeModulesProxy"),
+  EventEmitter: require("./src/EventEmitter"),
+  requireNativeViewManager: require("./src/NativeViewManagerAdapter").requireNativeViewManager };

@@ -1,0 +1,66 @@
+2ce5aaeaf4945c3520fd3872195fff17
+"use strict";var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _reactNative = require("react-native");var
+
+
+
+
+
+
+
+
+
+
+EventEmitter = function () {
+
+
+
+
+  function EventEmitter(nativeModule) {(0, _classCallCheck2.default)(this, EventEmitter);this._listenersCount = 0;
+    this._nativeModule = nativeModule;
+    this._eventEmitter = new _reactNative.NativeEventEmitter(nativeModule);
+  }(0, _createClass2.default)(EventEmitter, [{ key: "addListener", value: function addListener(
+
+    eventName, listener) {
+      this._listenersCount += 1;
+      if (_reactNative.Platform.OS === 'android' && this._nativeModule.startObserving) {
+        if (this._listenersCount === 1) {
+
+
+          this._nativeModule.startObserving();
+        }
+      }
+      return this._eventEmitter.addListener(eventName, listener);
+    } }, { key: "removeAllListeners", value: function removeAllListeners(
+
+    eventName) {
+      var listenersToRemoveCount = this._eventEmitter.listeners(eventName).length;
+      var newListenersCount = Math.max(0, this._listenersCount - listenersToRemoveCount);
+
+      if (_reactNative.Platform.OS === 'android' && this._nativeModule.stopObserving && newListenersCount === 0) {
+        this._nativeModule.stopObserving();
+      }
+
+      this._eventEmitter.removeAllListeners(eventName);
+      this._listenersCount = newListenersCount;
+    } }, { key: "removeSubscription", value: function removeSubscription(
+
+    subscription) {
+      this._listenersCount -= 1;
+
+      if (_reactNative.Platform.OS === 'android' && this._nativeModule.stopObserving) {
+        if (this._listenersCount === 0) {
+          this._nativeModule.stopObserving();
+        }
+      }
+
+      this._eventEmitter.removeSubscription(subscription);
+    } }, { key: "emit", value: function emit(
+
+    eventType) {var _this$_eventEmitter;for (var _len = arguments.length, params = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {params[_key - 1] = arguments[_key];}
+      (_this$_eventEmitter = this._eventEmitter).emit.apply(_this$_eventEmitter, [eventType].concat(params));
+    } }]);return EventEmitter;}();
+
+
+module.exports = EventEmitter;

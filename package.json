@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest"
   },
   "dependencies": {
     "@expo/vector-icons": "^8.0.0",
@@ -16,15 +17,20 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-elements": "^0.19.1",
     "react-navigation": "^3.0.0",
-    "rn-zoomable": "^1.0.3"
+    "rn-zoomable": "^1.0.3",
+    "styled-components": "^4.1.1"
   },
   "eslintConfig": {
     "extends": "universe"
   },
   "devDependencies": {
+    "babel-jest": "^23.6.0",
     "babel-preset-expo": "^5.0.0",
     "eslint": "^5.9.0",
     "eslint-config-universe": "^1.0.7",
-    "prettier": "^1.15.2"
+    "jest": "^23.6.0",
+    "jest-expo": "^31.0.0",
+    "prettier": "^1.15.2",
+    "react-native-testing-library": "^1.4.0"
   }
 }
