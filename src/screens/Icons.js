@@ -70,6 +70,23 @@ const vicons = [
   'home',
 ];
 
+const fuel = [
+  'add',
+  'back',
+  'broadcast',
+  'call',
+  'capitalise',
+  'chart',
+  'gear',
+  'grow',
+  'info',
+  'people',
+  'rocket',
+  'sequence',
+  'textcard',
+  'trash',
+];
+
 export default class HeaderScreen extends Component {
   render() {
     return (
@@ -112,56 +129,13 @@ export default class HeaderScreen extends Component {
           <Text style={{ fontSize: 20, fontFamily: 'GeometriaBold', lineHeight: 20, padding: 10 }}>
             Fuel
           </Text>
-          <View style={{ padding: 10 }}>
-            <Fuel name="add" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>add</Text>
-          </View>
-          <View style={{ padding: 10 }}>
-            <Fuel name="back" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>back</Text>
-          </View>
-          <View style={{ padding: 10 }}>
-            <Fuel name="broadcast" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>broadcast</Text>
-          </View>
-          <View style={{ padding: 10 }}>
-            <Fuel name="call" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>call</Text>
-          </View>
-          <View style={{ padding: 10 }}>
-            <Fuel name="capitalise" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>
-              capitalise
-            </Text>
-          </View>
-          <View style={{ padding: 10 }}>
-            <Fuel name="gear" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>gear</Text>
-          </View>
-          <View style={{ padding: 10 }}>
-            <Fuel name="info" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>info</Text>
-          </View>
-          <View style={{ padding: 10 }}>
-            <Fuel name="people" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>people</Text>
-          </View>
-          <View style={{ padding: 10 }}>
-            <Fuel name="rocket" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>rocket</Text>
-          </View>
-          <View style={{ padding: 10 }}>
-            <Fuel name="sequence" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>sequence</Text>
-          </View>
-          <View style={{ padding: 10 }}>
-            <Fuel name="textcard" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>textcard</Text>
-          </View>
-          <View style={{ padding: 10 }}>
-            <Fuel name="trash" size={20} color={colors.black} />
-            <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>trash</Text>
-          </View>
+          {fuel.map(f => (
+            <View key={f} style={{ padding: 10 }}>
+              <Fuel name={f} size={20} color={colors.black} />
+              <Text style={{ fontSize: 20, fontFamily: 'Geometria', lineHeight: 20 }}>{f}</Text>
+            </View>
+          ))}
+
           <Text style={{ fontSize: 20, fontFamily: 'GeometriaBold', lineHeight: 20, padding: 10 }}>
             Vicon
           </Text>
